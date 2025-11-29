@@ -1,5 +1,7 @@
 import time
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use("Agg")
 from . import socketio
 from app.model import MlModel
 
@@ -9,13 +11,13 @@ def process_file(task_id, input_path, result_path, plot_path):
     model.process_file(input_path, result_path)
 
     # 10 шагов обработки
-    for i in range(11):
-        percent = i * 10
+    for i in range(2):
+        model.process_file(input_path, result_path)
+        percent = i * 100
         socketio.emit("progress", {
             "task_id": task_id,
-            "progress": percent
+            "percent": percent
         })
-        model.process_file(input_path, result_path)
 
     # создаём файл результата
     with open(result_path, "w") as f:

@@ -6,4 +6,4 @@ class MlModel:
         pass
 
     def process_file(self, file_path: str, result_path: str):
-        time.sleep(5)
+        time.sleep(1)
